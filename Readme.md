@@ -1,0 +1,2 @@
+# Python-Homework
+This repository contains the code files I created during the process of learning Python on a Raspberry Pi Pico W. The lessons can be found on YouTube. See Paul McWhorter's Raspberry Pi Pico W Lessons for Absolute Beginners: https://www.youtube.com/playlist?list=PLGs0VKk2DiYz8js1SJog21cDhkBqyAhC5
