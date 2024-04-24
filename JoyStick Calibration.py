@@ -66,7 +66,7 @@ def fncFetchJoyStick ():
 
 #=============================================================================
 #
-# Function: fncGetResting
+# Function: fncGetRestingAvg
 #
 # Purpose:	Get the high and low values for the joystick in a resting state
 #			Grab the current (resting) values for x and y 50 times and
@@ -78,7 +78,7 @@ def fncFetchJoyStick ():
 #
 #=============================================================================
 
-def fncGetResting ():
+def fncGetRestingAvg ():
     
     bFirstPass = True
     
@@ -128,6 +128,52 @@ def fncGetResting ():
     yLow = round (yLow / yLowCount)
     yHigh = round (yHigh / yHighCount)
     
+    return (xLow, xHigh, yLow, yHigh)
+
+#=============================================================================
+#
+# Function: fncGetResting
+#
+# Purpose:	Get the high and low values for the joystick in a resting state
+#
+# Input:	None
+#
+# Results:	None
+#
+#=============================================================================
+
+def fncGetResting ():
+    
+    xLow = 999999
+    xHigh = 0
+
+    yLow = 999999
+    yHigh = 0
+
+    # -----	50 times should give us a decent average
+    
+    for iteration in range (200):
+        
+        # -----	Fetch the current joystick values
+
+        xActualVal, yActualVal = fncFetchJoyStick ()
+        
+        # --- Accumulate the reported values
+        
+        if xActualVal < xLow:
+            xLow = xActualVal
+        
+        if xActualVal > xHigh:
+            xHigh = xActualVal
+      
+        if yActualVal < yLow:
+            yLow = yActualVal
+        
+        if yActualVal > yHigh:
+            yHigh = yActualVal
+        
+        time.sleep (.01)
+
     return (xLow, xHigh, yLow, yHigh)
 
 #=============================================================================
